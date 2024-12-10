@@ -23,7 +23,7 @@
       <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
       <a-nft
         type="nft"
-        url="C:\CodingProjects\Sticker\assets\test"
+        url="https://github.com/citrusapple/Sticker/tree/main/assets/test"
         smooth="true"
         smoothCount="10"
         smoothTolerance=".01"
@@ -32,7 +32,7 @@
         <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
         <!--
         <a-entity
-          gltf-model="C:\CodingProjects\Sticker\assets\placeholdercube"
+          gltf-model="https://github.com/citrusapple/Sticker/blob/main/assets/placeholdercube.dae"
           scale="5 5 5"
           position="50 150 0"
         >
@@ -48,5 +48,15 @@
       <!-- static camera that moves according to the device movemenents -->
       <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+      document.querySelector('a-nft').addEventListener('markerFound', function() {
+        console.log('Marker Found!');
+      });
+
+      document.querySelector('a-nft').addEventListener('markerLost', function() {
+        console.log('Marker Lost!');
+      });
+    </script>
   </body>
 </html>
