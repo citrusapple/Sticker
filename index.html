@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WebAR Image Tracking with AR.js</title>
+    <title>WebAR with Hiro Marker using AR.js</title>
     <!-- A-Frame Library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <!-- AR.js Library -->
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
     <style>
       body {
         margin: 0;
@@ -14,24 +14,13 @@
     </style>
   </head>
   <body>
-    <a-scene
-      embedded
-      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-      vr-mode-ui="enabled: false">
+    <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;" vr-mode-ui="enabled: false">
       
-      <!-- Image Marker for Tracking -->
-      <a-nft
-        type="nft"
-        url="https://raw.githubusercontent.com/citrusapple/Sticker/main/assets/test"
-        smooth="true"
-        smoothCount="10"
-        smoothTolerance="0.01"
-        smoothThreshold="5">
-
-        <!-- 3D Box Appears When Image is Detected -->
+      <!-- Hiro Marker for Tracking -->
+      <a-marker preset="hiro">
+        <!-- 3D Box Appears When Hiro Marker is Detected -->
         <a-box position="0 0.5 0" color="orange" rotation="0 45 0" animation="property: rotation; to: 0 405 0; loop: true; dur: 3000"></a-box>
-        
-      </a-nft>
+      </a-marker>
 
       <!-- Camera -->
       <a-entity camera></a-entity>
@@ -40,12 +29,12 @@
 
     <!-- Debugging Script -->
     <script>
-      document.querySelector('a-nft').addEventListener('markerFound', () => {
-        console.log('Marker Found!');
+      document.querySelector('a-marker').addEventListener('markerFound', () => {
+        console.log('Hiro Marker Found!');
       });
 
-      document.querySelector('a-nft').addEventListener('markerLost', () => {
-        console.log('Marker Lost!');
+      document.querySelector('a-marker').addEventListener('markerLost', () => {
+        console.log('Hiro Marker Lost!');
       });
     </script>
   </body>
