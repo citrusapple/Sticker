@@ -5,7 +5,7 @@
     <!-- A-Frame Library -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <!-- AR.js Library -->
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
     <style>
       body {
         margin: 0;
@@ -31,14 +31,22 @@
     </a-scene>
 
     <!-- Debugging Script -->
-    <script>
-      document.querySelector('a-marker').addEventListener('markerFound', () => {
-        console.log('Marker Found!');
-      });
+    <div id="debug" style="position: fixed; top: 10px; left: 10px; background: white; padding: 10px; z-index: 1000;"></div>
 
-      document.querySelector('a-marker').addEventListener('markerLost', () => {
-        console.log('Marker Lost!');
+    <script>
+      const debugElement = document.getElementById('debug');
+      const marker = document.querySelector('a-marker');
+    
+      marker.addEventListener('markerFound', () => {
+        console.log('Hiro Marker Found!');
+        debugElement.innerText = 'Hiro Marker Found!';
+      });
+    
+      marker.addEventListener('markerLost', () => {
+        console.log('Hiro Marker Lost!');
+        debugElement.innerText = 'Hiro Marker Lost!';
       });
     </script>
+    
   </body>
 </html>
