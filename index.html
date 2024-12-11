@@ -21,6 +21,7 @@
       <!-- a-nft is the anchor that defines an Image Tracking entity -->
       <!-- on 'url' use the path to the Image Descriptors created before. -->
       <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
+      <!--
       <a-nft
         type="nft"
         url="https://raw.githubusercontent.com/citrusapple/Sticker/main/assets/test"
@@ -29,6 +30,7 @@
         smoothTolerance=".01"
         smoothThreshold="5"
       >
+  -->
         <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
         <!--
         <a-entity
@@ -38,12 +40,18 @@
         >
         </a-entity>
       </a-nft>-->
-        <a-box position="0 0.5 0" material="color: red;"></a-box>
-        <a-animation attribute="rotation"
-          dur="3000"
-          to="360 360 0"
-          repeat="indefinite"
-          easing="linear"></a-animation>
+        <a-marker preset="hiro">
+          <a-box position="0 0.5 0" material="color: red;">
+            <a-animation attribute="rotation"
+              dur="3000"
+              to="360 360 0"
+              repeat="indefinite"
+              easing="linear">
+          </a-animation>
+          </a-box>
+        </a-marker>
+        
+
       
       <!-- static camera that moves according to the device movemenents -->
       <a-entity camera></a-entity>
