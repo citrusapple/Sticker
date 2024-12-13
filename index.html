@@ -1,21 +1,96 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #debug {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        z-index: 1000;
+        font-family: monospace;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <div id="debug">Debug Info: Waiting for events...</div>
+
+    <a-scene
+      mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
+
       <a-assets>
         <img id="card" src="assets/targetimgchowpuff.png" />
         <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
       <a-entity mindar-image-target="targetIndex: 0">
         <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+        <a-gltf-model
+          rotation="0 0 0"
+          position="0 0 0.1"
+          scale="0.005 0.005 0.005"
+          src="#avatarModel"
+          animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+        </a-gltf-model>
       </a-entity>
     </a-scene>
+
+    <script>
+      const debugElement = document.getElementById('debug');
+      const scene = document.querySelector('a-scene');
+      const target = document.querySelector('[mindar-image-target]');
+
+      // Event listener for asset loading errors
+      scene.addEventListener('loaded', () => {
+        debugElement.innerText = 'Scene loaded successfully!';
+        console.log('Scene loaded successfully!');
+      });
+
+      scene.addEventListener('error', (event) => {
+        debugElement.innerText = `Error: ${event.detail}`;
+        console.error('Error:', event.detail);
+      });
+
+      // Event listener for marker found
+      target.addEventListener('targetFound', () => {
+        debugElement.innerText = 'Marker Found!';
+        console.log('Marker Found!');
+      });
+
+      // Event listener for marker lost
+      target.addEventListener('targetLost', () => {
+        debugElement.innerText = 'Marker Lost!';
+        console.log('Marker Lost!');
+      });
+
+      // Handle general errors
+      window.addEventListener('error', (event) => {
+        debugElement.innerText = `Error: ${event.message}`;
+        console.error('Error:', event.message);
+      });
+
+      // Handle MindAR initialization errors
+      scene.addEventListener('mindar-error', (event) => {
+        debugElement.innerText = `MindAR Error: ${event.detail}`;
+        console.error('MindAR Error:', event.detail);
+      });
+    </script>
   </body>
 </html>
