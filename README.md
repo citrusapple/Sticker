@@ -1,2 +1,2 @@
-# Sticker
-third attempt at setup for image tracking with AR.js with A Frame
+# AR Sticker
+This is an image tracking project utilizing MindAR with AFrame
