@@ -17,7 +17,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Plane",
+			"name":"parchment texture",
 			"scale":[
 				1,
 				1.1858950853347778,
@@ -31,7 +31,7 @@
 		},
 		{
 			"mesh":1,
-			"name":"Plane.002",
+			"name":"roses",
 			"scale":[
 				1.3470964431762695,
 				1.1649314165115356,
@@ -45,7 +45,7 @@
 		},
 		{
 			"mesh":2,
-			"name":"Plane.001",
+			"name":"poem",
 			"scale":[
 				1,
 				1.1858950853347778,
@@ -84,15 +84,13 @@
 			}
 		},
 		{
+			"alphaMode":"BLEND",
 			"doubleSided":true,
 			"name":"Material.006",
 			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.800000011920929,
-					0.800000011920929,
-					0.800000011920929,
-					1
-				],
+				"baseColorTexture":{
+					"index":2
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -148,8 +146,12 @@
 			"source":0
 		},
 		{
-			"sampler":1,
+			"sampler":0,
 			"source":1
+		},
+		{
+			"sampler":0,
+			"source":2
 		}
 	],
 	"images":[
@@ -162,6 +164,11 @@
 			"mimeType":"image/png",
 			"name":"RoseFormatted",
 			"uri":"RoseFormatted.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"letterrose",
+			"uri":"letterrose.png"
 		}
 	],
 	"accessors":[
@@ -331,12 +338,6 @@
 		}
 	],
 	"samplers":[
-		{
-			"magFilter":9729,
-			"minFilter":9987,
-			"wrapS":33071,
-			"wrapT":33071
-		},
 		{
 			"magFilter":9729,
 			"minFilter":9987
