@@ -44,14 +44,14 @@
       }
     });
 
-    document.querySelector("a-scene").setAttribute("puff-parallax", "");
+
   </script>
 
   <body>
     <div id="debug">Debug Info: Waiting for events...</div>
 
     <a-scene
-      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200;"
+      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:#video"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
@@ -100,6 +100,12 @@
       const scene = document.querySelector('a-scene');
       const target = document.querySelector('[mindar-image-target]');
       const video = document.querySelector('#video')
+      
+      
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("a-scene").setAttribute("puff-parallax", "");
+      });
+      
       // Event listener for asset loading errors
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Scene loaded successfully!';
