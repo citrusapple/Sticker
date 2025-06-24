@@ -110,6 +110,7 @@
       const target = document.querySelector('[mindar-image-target]');
       const video = document.querySelector('#video')
       const scanner = document.querySelector('#custom-scanner')
+
       
       
       document.addEventListener("DOMContentLoaded", () => {
@@ -120,6 +121,8 @@
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Magic Bubble is Ready!';
         console.log('Scene loaded successfully!');
+        scanner.style.opacity = 1;
+        scanner.style.display = "block";
       });
 
       scene.addEventListener('error', (event) => {
