@@ -103,8 +103,8 @@
       const video = document.querySelector('#video')
       // Event listener for asset loading errors
       scene.addEventListener('loaded', () => {
-        debugElement.innerText = 'Magic Bubble is ready!';
-        console.log('Scene loaded successfully!');
+        debugElement.innerText = 'Scene loaded successfully!';
+        console.log('Magic Bubble Ready');
       });
 
       scene.addEventListener('error', (event) => {
@@ -114,16 +114,16 @@
 
       // Event listener for marker found
       target.addEventListener('targetFound', () => {
-        debugElement.innerText = 'Magic sensed!';
-        console.log('Marker Found!');
+        debugElement.innerText = 'Marker Found!';
+        console.log('Magic Sensed!');
 
         video.play();
       });
 
       // Event listener for marker lost
       target.addEventListener('targetLost', () => {
-        debugElement.innerText = 'Magic Lost!';
-        console.log('Marker Lost!');
+        debugElement.innerText = 'Marker Lost!';
+        console.log('Magic Lost!');
         video.pause();
       });
 
