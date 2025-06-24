@@ -51,12 +51,11 @@
     <div id="debug">Debug Info: Waiting for events...</div>
 
     <a-scene
-      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning: '#custom-scanner"
+      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:#video"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      
       >
 
       <a-assets>
@@ -104,7 +103,7 @@
       // Event listener for asset loading errors
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Scene loaded successfully!';
-        console.log('Magic Bubble Ready');
+        console.log('Scene loaded successfully!');
       });
 
       scene.addEventListener('error', (event) => {
@@ -115,7 +114,7 @@
       // Event listener for marker found
       target.addEventListener('targetFound', () => {
         debugElement.innerText = 'Marker Found!';
-        console.log('Magic Sensed!');
+        console.log('Marker Found!');
 
         video.play();
       });
@@ -123,7 +122,7 @@
       // Event listener for marker lost
       target.addEventListener('targetLost', () => {
         debugElement.innerText = 'Marker Lost!';
-        console.log('Magic Lost!');
+        console.log('Marker Lost!');
         video.pause();
       });
 
