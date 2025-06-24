@@ -51,7 +51,7 @@
     <div id="debug">Debug Info: Waiting for events...</div>
 
     <a-scene
-      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning: #custom-loader"
+      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning: #custom-scanner"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
@@ -68,7 +68,7 @@
         <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
         <video id="video" src="./assets/circleanimation.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
         <a-asset-item id="testheart" src="assets/cube.gltf"></a-asset-item>
-        <video id="custom-loader" src="./assets/circleanimation.webm" autoplay loop muted playsinline></video>
+        <video id="custom-scanner" src="./assets/circleanimation.webm" autoplay loop muted playsinline></video>
       </a-assets>
   
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -101,7 +101,6 @@
       const scene = document.querySelector('a-scene');
       const target = document.querySelector('[mindar-image-target]');
       const video = document.querySelector('#video')
-      const loader = document.getelementbyId('#custom-loader')
       // Event listener for asset loading errors
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Scene loaded successfully!';
