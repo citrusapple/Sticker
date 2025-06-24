@@ -26,26 +26,37 @@
     </style>
   </head>
   <script>
-  AFRAME.registerComponent("puff-parallax", {
-    tick: function () {
-      const cam = document.querySelector("a-camera").object3D.position;
-      const front = document.querySelector("#puff-front").object3D;
-      const mid   = document.querySelector("#puff-mid").object3D;
-      const back  = document.querySelector("#puff-back").object3D;
+    AFRAME.registerComponent("puff-parallax", {
+      schema: {
+        ease: { type: "number", default: 0.1 }  // lower = smoother
+      },
+      init: function () {
+        const s = this;
+        s.front = document.querySelector("#puff-front").object3D;
+        s.mid = document.querySelector("#puff-mid").object3D;
+        s.back = document.querySelector("#puff-back").object3D;
 
-      front.position.x = cam.x * 0.06;
-      front.position.y = cam.y * 0.06;
+        s.frontTarget = new THREE.Vector3();
+        s.midTarget = new THREE.Vector3();
+        s.backTarget = new THREE.Vector3();
+      },
+      tick: function () {
+        const cam = document.querySelector("a-camera").object3D.position;
 
-      mid.position.x = cam.x * 0.03;
-      mid.position.y = cam.y * 0.03;
+        // Target positions based on camera
+        this.frontTarget.set(cam.x * 0.06, cam.y * 0.06, 0.05);
+        this.midTarget.set(cam.x * 0.03, cam.y * 0.03, 0.02);
+        this.backTarget.set(cam.x * 0.01, cam.y * 0.01, -0.01);
 
-      back.position.x = cam.x * 0.01;
-      back.position.y = cam.y * 0.01;
-    }
-  });
+        // Lerp (easing)
+        this.front.position.lerp(this.frontTarget, this.data.ease);
+        this.mid.position.lerp(this.midTarget, this.data.ease);
+        this.back.position.lerp(this.backTarget, this.data.ease);
+      }
+    });
 
-  document.querySelector("a-scene").setAttribute("puff-parallax", "");
-</script>
+    document.querySelector("a-scene").setAttribute("puff-parallax", "");
+  </script>
 
   <body>
     <div id="debug">Debug Info: Waiting for events...</div>
