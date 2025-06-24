@@ -50,14 +50,15 @@
   <body>
     <div id="debug">Debug Info: Waiting for events...</div>
     <video id="custom-scanner" src="./assets/circleanimation.webm" autoplay loop muted playsinline style="
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 50vw;
-      height: 50vh;
-      object-fit: none;
-      z-index: 9999;
-      pointer-events: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50vw;
+        height: 50vh;
+        object-fit: contain;
+        z-index: 9999;
+        pointer-events: none;
     "></video>
     <a-scene
       mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:no"
