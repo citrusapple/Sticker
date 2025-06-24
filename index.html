@@ -51,13 +51,13 @@
     <div id="debug">Debug Info: Waiting for events...</div>
 
     <a-scene
-      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:#video"
+      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:no"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
       >
-
+      <video id="custom-scanner" src="./assets/circleanimation.webm" autoplay loop muted playsinline></video>
       <a-assets>
         <!--target image asset-->
         <img id="puff" src="assets/targetimgchowpuff.png" />
@@ -67,7 +67,7 @@
         <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
         <video id="video" src="./assets/circleanimation.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
         <a-asset-item id="testheart" src="assets/cube.gltf"></a-asset-item>
-        <video id="custom-scanner" src="./assets/circleanimation.webm" autoplay loop muted playsinline></video>
+        
       </a-assets>
   
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -100,15 +100,16 @@
       const scene = document.querySelector('a-scene');
       const target = document.querySelector('[mindar-image-target]');
       const video = document.querySelector('#video')
+      const scanner = document.querySelector('#custom-scanner')
       
       
       document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("a-scene").setAttribute("puff-parallax", "");
       });
-      
+
       // Event listener for asset loading errors
       scene.addEventListener('loaded', () => {
-        debugElement.innerText = 'Scene loaded successfully!';
+        debugElement.innerText = 'Magic Bubble is Ready!';
         console.log('Scene loaded successfully!');
       });
 
@@ -120,6 +121,7 @@
       // Event listener for marker found
       target.addEventListener('targetFound', () => {
         debugElement.innerText = 'Marker Found!';
+        scanner.display = none;
         console.log('Marker Found!');
 
         video.play();
