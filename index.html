@@ -5,6 +5,7 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
     <style>
       body {
         margin: 0;
@@ -24,6 +25,28 @@
       }
     </style>
   </head>
+  <script>
+  AFRAME.registerComponent("puff-parallax", {
+    tick: function () {
+      const cam = document.querySelector("a-camera").object3D.position;
+      const front = document.querySelector("#puff-front").object3D;
+      const mid   = document.querySelector("#puff-mid").object3D;
+      const back  = document.querySelector("#puff-back").object3D;
+
+      front.position.x = cam.x * 0.06;
+      front.position.y = cam.y * 0.06;
+
+      mid.position.x = cam.x * 0.03;
+      mid.position.y = cam.y * 0.03;
+
+      back.position.x = cam.x * 0.01;
+      back.position.y = cam.y * 0.01;
+    }
+  });
+
+  document.querySelector("a-scene").setAttribute("puff-parallax", "");
+</script>
+
   <body>
     <div id="debug">Debug Info: Waiting for events...</div>
 
@@ -49,22 +72,13 @@
       <!-- <a-light type="directional" intensity="0.5" castShadow="false"></a-light> -->
 
       <a-entity mindar-image-target="targetIndex: 1" smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5">
-        <!-- <a-plane src="#puff" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane> -->
-        <!--<a-gltf-model
-          rotation="90 0 0"
-          position="0 0 0.4"
-          scale="1 1 1"
-          src="#testcircle">
-        </a-gltf-model> -->
+        <!--
         <a-video src="#video" position="0.5 0 0" width="1" height="1" rotation="0 0 0" id="videoPlane"></a-video>
-        <a-video src="#video" position="0 0.5 0" width="1" height="1" rotation="0 0 0" id="videoPlane"></a-video>
-        <a-plane src="#puff" position="0 0 0" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-gltf-model
-          rotation="0 0 0"
-          position="0 0 0.1"
-          scale="0.005 0.005 0.005"
-          src="#rose">
-        </a-gltf-model>
+      -->
+        <a-plane id ="puff-back" src="#puff" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-plane id ="puff-mid" src="#puff" position="0 0 0.5" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-plane id ="puff-front" src="#puff" position="0 0 1" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 0">
         <!-- <a-plane src="#Maneki" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane> -->
