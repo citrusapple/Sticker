@@ -51,12 +51,12 @@
     <div id="debug">Debug Info: Waiting for events...</div>
 
     <a-scene
-      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200"
+      mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning: #custom-loader"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      uiScanning:no
+      
       >
 
       <a-assets>
@@ -67,16 +67,10 @@
         <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
         <video id="video" src="./assets/circleanimation.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
-        <video id="video2" src="./assets/circleanimation.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
         <a-asset-item id="testheart" src="assets/cube.gltf"></a-asset-item>
+        <video id="custom-loader" src="./assets/circleanimation.webm" autoplay loop muted playsinline></video>
       </a-assets>
-      <video id="custom-loader" src="./assets/circleanimation.webm" autoplay loop muted playsinline style="
-        position: fixed;
-        top: 0; left: 0;
-        width: 50vw; height: 50vh;
-        object-fit: none;
-        z-index: 9999;
-      "></video>
+  
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <!-- <a-light type="directional" intensity="0.5" castShadow="false"></a-light> -->
 
