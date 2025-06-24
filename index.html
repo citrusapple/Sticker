@@ -27,31 +27,20 @@
   </head>
   <script>
     AFRAME.registerComponent("puff-parallax", {
-      schema: {
-        ease: { type: "number", default: 0.1 }  // lower = smoother
-      },
-      init: function () {
-        const s = this;
-        s.front = document.querySelector("#puff-front").object3D;
-        s.mid = document.querySelector("#puff-mid").object3D;
-        s.back = document.querySelector("#puff-back").object3D;
-
-        s.frontTarget = new THREE.Vector3();
-        s.midTarget = new THREE.Vector3();
-        s.backTarget = new THREE.Vector3();
-      },
       tick: function () {
         const cam = document.querySelector("a-camera").object3D.position;
+        const front = document.querySelector("#puff-front").object3D;
+        const mid   = document.querySelector("#puff-mid").object3D;
+        const back  = document.querySelector("#puff-back").object3D;
 
-        // Target positions based on camera
-        this.frontTarget.set(cam.x * 0.06, cam.y * 0.06, 0.05);
-        this.midTarget.set(cam.x * 0.03, cam.y * 0.03, 0.02);
-        this.backTarget.set(cam.x * 0.01, cam.y * 0.01, -0.01);
+        front.position.x = cam.x * 0.06;
+        front.position.y = cam.y * 0.06;
 
-        // Lerp (easing)
-        this.front.position.lerp(this.frontTarget, this.data.ease);
-        this.mid.position.lerp(this.midTarget, this.data.ease);
-        this.back.position.lerp(this.backTarget, this.data.ease);
+        mid.position.x = cam.x * 0.03;
+        mid.position.y = cam.y * 0.03;
+
+        back.position.x = cam.x * 0.01;
+        back.position.y = cam.y * 0.01;
       }
     });
 
@@ -87,8 +76,8 @@
         <a-plane id ="puff-mid" src="#puff" position="0 0 0.08" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>        
       -->
         <a-plane id ="puff-back" src="#puff" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-plane id ="puff-mid" src="#puff" position="0 0 0.08" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-video id ="puff-front" src="#video" position="0 0 0.12" width="1" height="1" rotation="0 0 0" id="videoPlane"></a-video>
+        <a-plane id ="puff-mid" src="#puff" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-video id ="puff-front" src="#video" position="0 0 0.25" width="1" height="1" rotation="0 0 0" id="videoPlane"></a-video>
         
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 0">
