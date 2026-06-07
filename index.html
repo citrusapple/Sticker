@@ -95,7 +95,7 @@
       -->
         <a-video id ="puff-back" src="#Background" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
         <a-plane id ="puff-mid" src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-video id ="puff-front" src="#Fairy" position="0 0 0.25" width="1" height="1" rotation="0 0 0"></a-video>
+        <a-video id ="puff-front" src="#Fairy" position="0 0 0.25" width="1" height="1" rotation="0 0 0" transparent="true"></a-video>
         <a-plane id ="DoorFrame" src="#DoorFrame" position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 0">
@@ -115,7 +115,7 @@
       const debugElement = document.getElementById('debug');
       const scene = document.querySelector('a-scene');
       const target = document.querySelector('[mindar-image-target]');
-      const targetVideos = document.querySelectorAll('[data-target-video]');
+      let targetVideos = [];
       // const scanner = document.querySelector('#custom-scanner')
 
       
@@ -128,9 +128,16 @@
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Magic Bubble is Ready!';
         console.log('Scene loaded successfully!');
-        //scanner.style.opacity = 1;
-        //scanner.style.display = "block";
+ 
+        // Add new video IDs to this array as you add more assets.
+        targetVideos = ['Fairy', 'Background'].map(id => document.getElementById(id));
+        console.log('Target videos found:', targetVideos.length);
+ 
+        // Uncomment when scanner element is reinstated:
+        // scanner.style.opacity = 1;
+        // scanner.style.display = "block";
       });
+ 
 
       scene.addEventListener('error', (event) => {
         debugElement.innerText = `Error: ${event.detail}`;
