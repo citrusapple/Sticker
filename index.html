@@ -49,6 +49,8 @@
 
   <body>
     <div id="debug">Debug Info: Waiting for events...</div>
+   
+   <!-- replace this asset with the magic finder frame when ready.  This will  be showing up on screen before finding image target
     <video id="custom-scanner" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" autoplay loop muted playsinline style="
         position: fixed;
         top: 50%;
@@ -60,6 +62,7 @@
         z-index: 9999;
         pointer-events: none;
     "></video>
+  -->
     <a-scene
       mindar-image="imageTargetSrc: assets/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:no"
       color-space="sRGB"
@@ -112,8 +115,8 @@
       const debugElement = document.getElementById('debug');
       const scene = document.querySelector('a-scene');
       const target = document.querySelector('[mindar-image-target]');
-      const video = document.querySelector('#Fairy')
-      const scanner = document.querySelector('#custom-scanner')
+      const targetVideos = document.querySelectorAll('[data-target-video]');
+      // const scanner = document.querySelector('#custom-scanner')
 
       
       
@@ -125,8 +128,8 @@
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Magic Bubble is Ready!';
         console.log('Scene loaded successfully!');
-        scanner.style.opacity = 1;
-        scanner.style.display = "block";
+        //scanner.style.opacity = 1;
+        //scanner.style.display = "block";
       });
 
       scene.addEventListener('error', (event) => {
@@ -137,11 +140,11 @@
       // Event listener for marker found
       target.addEventListener('targetFound', () => {
         debugElement.innerText = 'Marker Found!';
-        scanner.style.transition = "opacity 0.5s ease";
-        scanner.style.opacity = 0;
-        setTimeout(() => {
-          scanner.style.display = "none";
-        }, 500);
+        //scanner.style.transition = "opacity 0.5s ease";
+        //scanner.style.opacity = 0;
+        setTimeout(() => //{
+          //scanner.style.display = "none";
+        //}, 500);
         console.log('Marker Found!');
         targetVideos.forEach(v => v.play());
       });
