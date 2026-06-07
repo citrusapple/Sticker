@@ -75,7 +75,10 @@
         <!--3D overlay asset-->
         <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
-        <video id="video" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
+        <video id="Fairy" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
+        <video id="Background" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyWindowAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
+        <img id="Midground" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyMidGround.png" />
+        <img id="DoorFrame" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyDoorFrame.png" />
         <a-asset-item id="testheart" src="assets/cube.gltf"></a-asset-item>
         
       </a-assets>
@@ -87,10 +90,10 @@
         <!--
         <a-plane id ="puff-mid" src="#puff" position="0 0 0.08" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>        
       -->
-        <a-plane id ="puff-back" src="#puff" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-plane id ="puff-mid" src="#puff" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-video id ="puff-front" src="#video" position="0 0 0.25" width="1" height="1" rotation="0 0 0" id="videoPlane"></a-video>
-        
+        <a-video id ="puff-back" src="#Background" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-plane id ="puff-mid" src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-video id ="puff-front" src="#Fairy" position="0 0 0.25" width="1" height="1" rotation="0 0 0" id="videoPlane"></a-video>
+        <a-plane id ="DoorFrame" src="#DoorFrame" position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 0">
         <!-- <a-plane src="#Maneki" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane> -->
