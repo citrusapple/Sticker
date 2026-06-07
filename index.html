@@ -75,8 +75,8 @@
         <!--3D overlay asset-->
         <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
-        <video id="Fairy" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
-        <video id="Background" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyWindowAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
+        <video id="Fairy" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
+        <video id="Background" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyWindowAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
         <img id="Midground" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyMidGround.png" />
         <img id="DoorFrame" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyDoorFrame.png" />
         <a-asset-item id="testheart" src="assets/cube.gltf"></a-asset-item>
@@ -143,14 +143,14 @@
           scanner.style.display = "none";
         }, 500);
         console.log('Marker Found!');
-        video.play();
+        targetVideos.forEach(v => v.play());
       });
 
       // Event listener for marker lost
       target.addEventListener('targetLost', () => {
         debugElement.innerText = 'Marker Lost!';
         console.log('Marker Lost!');
-        video.pause();
+        targetVideos.forEach(v => v.pause());
       });
 
       // Handle general errors
