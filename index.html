@@ -78,7 +78,7 @@
         <!--3D overlay asset-->
         <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
         <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
-        <video id="Fairy" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
+        <video id="Fairy" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
         <video id="Background" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyWindowAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
         <img id="Midground" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyMidGround.png" />
         <img id="DoorFrame" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyDoorFrame.png" />
@@ -93,9 +93,9 @@
         <!--
         <a-plane id ="puff-mid" src="#puff" position="0 0 0.08" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>        
       -->
-        <a-video id="puff-back" src="#Background" position="0 0 0.05" height="1" width="1" rotation="0 0 0" material="shader: flat; transparent: true; depthTest: false; side: double></a-video>
+        <a-video id ="puff-back" src="#Background" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
         <a-plane id ="puff-mid" src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-video id ="puff-front" src="#Fairy" position="0 0 0.25" width="1" height="1" rotation="0 0 0" transparent="true"></a-video>
+        <a-video id ="puff-front" src="#Fairy" position="0 0 0.25" width="1" height="1" rotation="0 0 0"></a-video>
         <a-plane id ="DoorFrame" src="#DoorFrame" position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 0">
@@ -115,7 +115,7 @@
       const debugElement = document.getElementById('debug');
       const scene = document.querySelector('a-scene');
       const target = document.querySelector('[mindar-image-target]');
-      let targetVideos = [];
+      const targetVideos = document.querySelectorAll('[data-target-video]');
       // const scanner = document.querySelector('#custom-scanner')
 
       
@@ -128,16 +128,9 @@
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Magic Bubble is Ready!';
         console.log('Scene loaded successfully!');
- 
-        // Add new video IDs to this array as you add more assets.
-        targetVideos = ['Fairy', 'Background'].map(id => document.getElementById(id));
-        console.log('Target videos found:', targetVideos.length);
- 
-        // Uncomment when scanner element is reinstated:
-        // scanner.style.opacity = 1;
-        // scanner.style.display = "block";
+        //scanner.style.opacity = 1;
+        //scanner.style.display = "block";
       });
- 
 
       scene.addEventListener('error', (event) => {
         debugElement.innerText = `Error: ${event.detail}`;
