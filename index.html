@@ -138,16 +138,16 @@
       });
 
       // Event listener for marker found
+ 
       target.addEventListener('targetFound', () => {
         debugElement.innerText = 'Marker Found!';
-        //scanner.style.transition = "opacity 0.5s ease";
-        //scanner.style.opacity = 0;
-        setTimeout(() => //{
-          //scanner.style.display = "none";
-        //}, 500);
+        // scanner.style.transition = "opacity 0.5s ease";
+        // scanner.style.opacity = 0;
+        // setTimeout(() => { scanner.style.display = "none"; }, 500);
         console.log('Marker Found!');
         targetVideos.forEach(v => v.play());
       });
+ 
 
       // Event listener for marker lost
       target.addEventListener('targetLost', () => {
