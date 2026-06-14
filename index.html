@@ -5,173 +5,186 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    
+
     <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
+      body { margin: 0; overflow: hidden; }
       #debug {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 10px;
-        z-index: 1000;
-        font-family: monospace;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        position: fixed; top: 10px; left: 10px;
+        background: rgba(255,255,255,0.9); padding: 10px;
+        z-index: 1000; font-family: monospace; font-size: 14px;
+        border: 1px solid #ccc; border-radius: 4px;
       }
     </style>
   </head>
+
   <script>
+    // Null guard lives here in registerComponent — NOT in DOMContentLoaded
     AFRAME.registerComponent("puff-parallax", {
       tick: function () {
-        const cam = document.querySelector("a-camera").object3D.position;
-        const front = document.querySelector("#puff-front").object3D;
-        const mid   = document.querySelector("#puff-mid").object3D;
-        const back  = document.querySelector("#puff-back").object3D;
+        const camEl   = document.querySelector("a-camera");
+        const frontEl = document.querySelector("#puff-front");
+        const midEl   = document.querySelector("#puff-mid");
+        const backEl  = document.querySelector("#puff-back");
+        if (!camEl || !frontEl || !midEl || !backEl) return;
+
+        const cam   = camEl.object3D.position;
+        const front = frontEl.object3D;
+        const mid   = midEl.object3D;
+        const back  = backEl.object3D;
 
         front.position.x = cam.x * 0.06;
         front.position.y = cam.y * 0.06;
-
-        mid.position.x = cam.x * 0.03;
-        mid.position.y = cam.y * 0.03;
-
-        back.position.x = cam.x * 0.01;
-        back.position.y = cam.y * 0.01;
+        mid.position.x   = cam.x * 0.03;
+        mid.position.y   = cam.y * 0.03;
+        back.position.x  = cam.x * 0.01;
+        back.position.y  = cam.y * 0.01;
       }
     });
-
-
   </script>
 
   <body>
     <div id="debug">Debug Info: Waiting for events...</div>
-   
-   <!-- replace this asset with the magic finder frame when ready.  This will  be showing up on screen before finding image target
-    <video id="custom-scanner" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" autoplay loop muted playsinline style="
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 50vw;
-        height: 50vh;
-        object-fit: contain;
-        z-index: 9999;
-        pointer-events: none;
+
+    <!-- Uncomment and swap src when magic finder frame asset is ready -->
+    <!--
+    <video id="custom-scanner" src="./assets/placeholder.webm" autoplay loop muted playsinline style="
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50vw; height: 50vh;
+      object-fit: contain; z-index: 9999; pointer-events: none;
     "></video>
-  -->
+    -->
+
     <a-scene
       mindar-image="imageTargetSrc: assets/TargetMindFiles/Target.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 200; uiScanning:no"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
-      >
-      
+    >
       <a-assets>
-        <!--target image asset-->
-        <img id="puff" src="assets/targetimgchowpuff.png" />
-        <img id="Maneki" src="assets/manekitiger.png" />
+        <!-- Target images -->
+        <img id="puff"         src="assets/targetimgchowpuff.png" />
+        <img id="Maneki"       src="assets/manekitiger.png" />
         <img id="ReadingFairy" src="assets/ReadingFairyAnimatedAssets/GreenFairyDoorAndFrame.png" />
-        <!--3D overlay asset-->
+
+        <!-- 3D models -->
         <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
-        <a-asset-item id="rose" src="assets/rose.gltf"></a-asset-item>
-        <video id="Fairy" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
-        <video id="Background" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyWindowAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous" data-target-video></video>
+        <a-asset-item id="rose"        src="assets/rose.gltf"></a-asset-item>
+        <a-asset-item id="testheart"   src="assets/cube.gltf"></a-asset-item>
+
+        <!-- Videos — add new IDs to targetVideos array in scene loaded below -->
+        <video id="Fairy"      src="./assets/ReadingFairyAnimatedAssets/ReadingFairyAnimatedFolder/ReadingFairyAnimated.webm" preload="auto" loop playsinline crossorigin="anonymous"></video>
+        <video id="Background" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyWindowAnimated.webm"                     preload="auto" loop playsinline crossorigin="anonymous"></video>
+
+        <!-- Static images -->
         <img id="Midground" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyMidGround.png" />
         <img id="DoorFrame" src="./assets/ReadingFairyAnimatedAssets/ReadingFairyDoorFrame.png" />
-        <a-asset-item id="testheart" src="assets/cube.gltf"></a-asset-item>
-        
       </a-assets>
-  
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <!-- <a-light type="directional" intensity="0.5" castShadow="false"></a-light> -->
 
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- ============================================================
+           TARGET 2: Reading Fairy scene (GreenFairyDoorAndFrame.png)
+           IDs on children required here — puff-parallax looks them up
+           ============================================================ -->
       <a-entity mindar-image-target="targetIndex: 2" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
-        <!--
-        <a-plane id ="puff-mid" src="#puff" position="0 0 0.08" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>        
-      -->
-        <a-video id ="puff-back" src="#Background" position="0 0 0.05" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
-        <a-plane id ="puff-mid" src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-video id ="puff-front" src="#Fairy" position="0 0 0.25" width="1" height="1" rotation="0 0 0" transparent="true"></a-video>
-        <a-plane id ="DoorFrame" src="#DoorFrame" position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-plane  id="puff-back"  position="0 0 0.05" height="1" width="1" rotation="0 0 0"
+                  material="src: #Background; shader: flat; transparent: true; depthTest: false; side: double"></a-plane>
+        <a-plane  id="puff-mid"   src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-video  id="puff-front" src="#Fairy"     position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
+        <a-plane  id="DoorFrame"  src="#DoorFrame" position="0 0 0.35" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
       </a-entity>
 
+      <!-- ============================================================
+           TARGET 1: Maneki / Rose
+           ============================================================ -->
       <a-entity mindar-image-target="targetIndex: 1">
-        <!-- <a-plane src="#Maneki" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-plane> -->
         <a-gltf-model
-          rotation="0 0 0"
-          position="0 0 0.1"
-          scale="0.005 0.005 0.005"
+          rotation="0 0 0" position="0 0 0.1" scale="0.005 0.005 0.005"
           src="#rose"
           animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
         </a-gltf-model>
-
       </a-entity>
+
+      <!-- ============================================================
+           TARGET 0: Chow Puff — add overlay content here when ready
+           No IDs needed on children since puff-parallax targets index 2
+           Reuses same asset src refs (#Background, #Fairy etc) — no redeclaration needed
+           ============================================================ -->
+      <a-entity mindar-image-target="targetIndex: 0" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
+        <!-- Add chow puff overlay assets here -->
+      </a-entity>
+
     </a-scene>
 
     <script>
       const debugElement = document.getElementById('debug');
-      const scene = document.querySelector('a-scene');
-      const target = document.querySelector('[mindar-image-target]');
-      let targetVideos = [];
-      // const scanner = document.querySelector('#custom-scanner')
+      const scene        = document.querySelector('a-scene');
+      let targetVideos   = [];
 
-      
-      
+      // DOMContentLoaded: only attaches the puff-parallax component — nothing else
       document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("a-scene").setAttribute("puff-parallax", "");
       });
 
-      // Event listener for asset loading errors
       scene.addEventListener('loaded', () => {
         debugElement.innerText = 'Magic Bubble is Ready!';
         console.log('Scene loaded successfully!');
- 
-        // Add new video IDs to this array as you add more assets.
+        // Add new video IDs here as you add more video assets
         targetVideos = ['Fairy', 'Background'].map(id => document.getElementById(id));
         console.log('Target videos found:', targetVideos.length);
- 
         // Uncomment when scanner element is reinstated:
-        // scanner.style.opacity = 1;
-        // scanner.style.display = "block";
+        // document.querySelector('#custom-scanner').style.display = "block";
       });
- 
 
       scene.addEventListener('error', (event) => {
         debugElement.innerText = `Error: ${event.detail}`;
         console.error('Error:', event.detail);
       });
 
-      // Event listener for marker found
- 
-      target.addEventListener('targetFound', () => {
-        debugElement.innerText = 'Marker Found!';
-        // scanner.style.transition = "opacity 0.5s ease";
-        // scanner.style.opacity = 0;
-        // setTimeout(() => { scanner.style.display = "none"; }, 500);
-        console.log('Marker Found!');
-        targetVideos.forEach(v => v.play());
-      });
- 
+      // Single listener definition handles all targets cleanly via querySelectorAll
+      document.querySelectorAll('[mindar-image-target]').forEach(targetEl => {
+        const idx = targetEl.getAttribute('mindar-image-target'); // e.g. "targetIndex: 2"
 
-      // Event listener for marker lost
-      target.addEventListener('targetLost', () => {
-        debugElement.innerText = 'Marker Lost!';
-        console.log('Marker Lost!');
-        targetVideos.forEach(v => v.pause());
+        targetEl.addEventListener('targetFound', () => {
+          debugElement.innerText = `Marker Found! (${idx})`;
+          console.log('Marker Found:', idx);
+
+          // --- DEFAULT: plays all videos for every target ---
+          // To add per-target behavior, add an if/else block here, for example:
+          //
+          // if (idx === 'targetIndex: 2') {
+          //   // fairy-specific logic, e.g. play only fairy videos
+          // } else if (idx === 'targetIndex: 0') {
+          //   // chow puff-specific logic
+          // }
+
+          targetVideos.forEach(v => v && v.play());
+
+          // Uncomment when scanner element is reinstated:
+          // const scanner = document.querySelector('#custom-scanner');
+          // scanner.style.transition = "opacity 0.5s ease";
+          // scanner.style.opacity = 0;
+          // setTimeout(() => { scanner.style.display = "none"; }, 500);
+        });
+
+        targetEl.addEventListener('targetLost', () => {
+          debugElement.innerText = `Marker Lost! (${idx})`;
+          console.log('Marker Lost:', idx);
+
+          // --- DEFAULT: pauses all videos for every target ---
+          // To add per-target behavior, add an if/else block here matching targetFound above
+
+          targetVideos.forEach(v => v && v.pause());
+        });
       });
 
-      // Handle general errors
       window.addEventListener('error', (event) => {
         debugElement.innerText = `Error: ${event.message}`;
         console.error('Error:', event.message);
       });
 
-      // Handle MindAR initialization errors
       scene.addEventListener('mindar-error', (event) => {
         debugElement.innerText = `MindAR Error: ${event.detail}`;
         console.error('MindAR Error:', event.detail);
