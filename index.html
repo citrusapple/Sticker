@@ -22,9 +22,9 @@
     AFRAME.registerComponent("puff-parallax", {
       tick: function () {
         const camEl   = document.querySelector("a-camera");
-        const frontEl = document.querySelector("#puff-front");
-        const midEl   = document.querySelector("#puff-mid");
-        const backEl  = document.querySelector("#puff-back");
+        const frontEl = document.querySelector("#reading-front");
+        const midEl   = document.querySelector("#reading-mid");
+        const backEl  = document.querySelector("#reading-back");
         if (!camEl || !frontEl || !midEl || !backEl) return;
 
         const cam   = camEl.object3D.position;
@@ -56,7 +56,7 @@
     -->
 
     <a-scene
-      mindar-image="imageTargetSrc: assets/TargetMindFiles/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 1; uiScanning:no"
+      mindar-image="imageTargetSrc: assets/TargetMindFiles/targets.mind; maxTrack: 2; debug: true; filterMinCF: 0.01; filterBeta: 0.1; uiScanning:no"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights: false; antialias: true; logarithmicDepthBuffer: true;"
       vr-mode-ui="enabled: false"
@@ -89,10 +89,10 @@
            IDs on children required here — puff-parallax looks them up
            ============================================================ -->
       <a-entity mindar-image-target="targetIndex: 2" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
-        <a-plane  id="puff-back"  position="0 0 0.05" height="1" width="1" rotation="0 0 0"
+        <a-plane  id="reading-back"  position="0 0 0.05" height="1" width="1" rotation="0 0 0"
                   material="src: #Background; shader: flat; transparent: true; depthTest: false; side: double"></a-plane>
-        <a-plane  id="puff-mid"   src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
-        <a-video  id="puff-front" src="#Fairy"     position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
+        <a-plane  id="reading-mid"   src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-video  id="reading-front" src="#Fairy"     position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
         <a-plane  id="DoorFrame"  src="#DoorFrame" position="0 0 0.35" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
       </a-entity>
 
@@ -113,7 +113,10 @@
            Reuses same asset src refs (#Background, #Fairy etc) — no redeclaration needed
            ============================================================ -->
       <a-entity mindar-image-target="targetIndex: 0" smooth="true" smoothCount="20" smoothTolerance="0.01" smoothThreshold="10">
-        <!-- Add chow puff overlay assets here -->
+        <a-plane  id="puff-back"  position="0 0 0.05" height="1" width="1" rotation="0 0 0" material="src: #Background; shader: flat; transparent: true; depthTest: false; side: double"></a-plane>
+        <a-plane  id="puff-mid"   src="#Midground" position="0 0 0.15" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
+        <a-video  id="puff-front" src="#Fairy"     position="0 0 0.25" height="1" width="1" rotation="0 0 0" transparent="true"></a-video>
+        <a-plane  id="DoorFrame"  src="#DoorFrame" position="0 0 0.35" height="1" width="1" rotation="0 0 0" transparent="true"></a-plane>
       </a-entity>
 
     </a-scene>
